@@ -11,13 +11,13 @@
 <script>
 // import uuid from 'uuid';
 // import { v4 as uuid } from "uuid";
-import Header from './components/layout/Header';
-import Todos from './components/Todos';
-import AddTodo from './components/AddTodo';
+import Header from '../components/layout/Header';
+import Todos from '../components/Todos';
+import AddTodo from '../components/AddTodo';
 import axios from 'axios';
 
 export default {
-  name: 'App',
+  name: 'Home',
   components: {
     Header,
     Todos,
@@ -36,7 +36,7 @@ export default {
     deleteTodo(id) {
       axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
       
-      .then( this.todos=this.todos.filter(todo => todo.id !== id))
+      .then(this.todos=this.todos.filter(todo => todo.id !== id))
       .catch(err => console.log(err));
       
     },
@@ -46,20 +46,17 @@ export default {
         title,
         completed
       })
-      .then( this.todos = [...this.todos,newTodo])
+      .then(this.todos = [...this.todos,newTodo])
       .catch(err => console.log(err));
-       
      
     }
-    },
-    created() {
+  },
+  created() {
     axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
    .then(res => this.todos = res.data)
    .catch(err => console.log(err));
    }
   }
-  
-  
 </script> 
 
 <style>
